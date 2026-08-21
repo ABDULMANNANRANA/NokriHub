@@ -1,0 +1,147 @@
+NokriHub/
+├── android/                          # RN CLI native project (auto-generated, edit only for native config)
+├── ios/                              # RN CLI native project (auto-generated)
+│
+├── src/
+│   ├── App.tsx                       # entry: wraps RootNavigator with providers (Auth, Query, Theme)
+│   │
+│   ├── navigation/
+│   │   ├── RootNavigator.tsx         # role-based switch: Auth | UserTabs | CompanyTabs
+│   │   ├── AuthStack.tsx
+│   │   ├── UserTabNavigator.tsx
+│   │   ├── CompanyTabNavigator.tsx
+│   │   ├── UserStackParams.ts        # TS param lists per stack (route typing)
+│   │   └── CompanyStackParams.ts
+│   │
+│   ├── screens/
+│   │   ├── auth/
+│   │   │   ├── LoginScreen.tsx
+│   │   │   ├── LinkedInCallbackScreen.tsx
+│   │   │   ├── CompanySignupScreen.tsx
+│   │   │   └── OnboardingRoleSetup.tsx      # first-login role upsert
+│   │   │
+│   │   ├── user/
+│   │   │   ├── feed/
+│   │   │   │   ├── FeedScreen.tsx
+│   │   │   │   └── JobDetailScreen.tsx
+│   │   │   ├── recommend/
+│   │   │   │   ├── RequestRecommendationScreen.tsx
+│   │   │   │   ├── RecommendSomeoneScreen.tsx
+│   │   │   │   └── ConnectionPickerScreen.tsx
+│   │   │   ├── cv/
+│   │   │   │   ├── MyCVsScreen.tsx
+│   │   │   │   ├── CVTemplatePickerScreen.tsx
+│   │   │   │   ├── CVEditorScreen.tsx
+│   │   │   │   └── CVPreviewScreen.tsx
+│   │   │   ├── activity/
+│   │   │   │   ├── ActivityScreen.tsx        # pending requests to act on
+│   │   │   │   └── RecommendationHistoryScreen.tsx
+│   │   │   └── profile/
+│   │   │       └── UserProfileScreen.tsx
+│   │   │
+│   │   └── company/
+│   │       ├── dashboard/
+│   │       │   └── CompanyDashboardScreen.tsx
+│   │       ├── jobs/
+│   │       │   ├── PostJobScreen.tsx
+│   │       │   ├── JobListScreen.tsx
+│   │       │   └── JobPipelineScreen.tsx      # kanban: New → Reviewed → Hired
+│   │       ├── candidates/
+│   │       │   └── CandidatePoolScreen.tsx
+│   │       └── profile/
+│   │           └── CompanyProfileScreen.tsx
+│   │
+│   ├── components/
+│   │   ├── shared/
+│   │   │   ├── JobCard.tsx
+│   │   │   ├── Avatar.tsx
+│   │   │   ├── Button.tsx
+│   │   │   ├── LoadingSpinner.tsx
+│   │   │   └── EmptyState.tsx
+│   │   ├── user/
+│   │   │   ├── ConnectionListItem.tsx
+│   │   │   ├── CVTemplateCard.tsx
+│   │   │   └── RecommendationCard.tsx
+│   │   └── company/
+│   │       ├── PipelineColumn.tsx
+│   │       └── CandidateListItem.tsx
+│   │
+│   ├── services/
+│   │   ├── supabase.ts               # client init
+│   │   ├── auth.service.ts           # login/logout/session, role upsert
+│   │   ├── linkedin.service.ts       # OAuth + connections fetch (with fallback flag)
+│   │   ├── jobs.service.ts
+│   │   ├── connections.service.ts
+│   │   ├── recommendations.service.ts
+│   │   ├── cv.service.ts             # CRUD + PDF export
+│   │   ├── pdf.service.ts            # react-native-html-to-pdf wrapper
+│   │   └── notifications.service.ts  # push registration + handlers
+│   │
+│   ├── hooks/
+│   │   ├── useAuth.ts
+│   │   ├── useRole.ts
+│   │   ├── useJobs.ts
+│   │   ├── useRecommendations.ts
+│   │   └── useCVs.ts
+│   │
+│   ├── store/
+│   │   ├── authStore.ts              # Zustand: session, role, user profile
+│   │   ├── jobsStore.ts
+│   │   └── cvStore.ts
+│   │
+│   ├── types/
+│   │   ├── user.ts
+│   │   ├── job.ts
+│   │   ├── recommendation.ts
+│   │   ├── cv.ts
+│   │   └── supabase.types.ts         # generated via `supabase gen types`
+│   │
+│   ├── theme/
+│   │   ├── colors.ts
+│   │   ├── typography.ts
+│   │   └── spacing.ts
+│   │
+│   ├── constants/
+│   │   ├── routes.ts
+│   │   └── config.ts                 # env-driven constants
+│   │
+│   └── utils/
+│       ├── validators.ts
+│       ├── formatters.ts
+│       └── errorHandling.ts
+│
+├── supabase/
+│   ├── migrations/
+│   │   ├── 0001_init_users.sql
+│   │   ├── 0002_cvs.sql
+│   │   ├── 0003_jobs.sql
+│   │   ├── 0004_connections.sql
+│   │   ├── 0005_recommendation_requests.sql
+│   │   ├── 0006_recommendations.sql
+│   │   ├── 0007_hires.sql
+│   │   └── 0008_rls_policies.sql
+│   ├── functions/                    # Edge Functions
+│   │   ├── on-request-accepted/      # writes recommendations row
+│   │   ├── on-hire-confirmed/        # Phase 2 stub: star calc
+│   │   └── send-push-notification/
+│   └── config.toml
+│
+├── assets/
+│   ├── fonts/
+│   ├── images/
+│       ├── Logo.png
+│   └── cv-templates/                 # static template assets/layouts
+│
+├── __tests__/
+│   ├── services/
+│   ├── components/
+│   └── screens/
+│
+├── .env.example                      # SUPABASE_URL, SUPABASE_ANON_KEY, LINKEDIN_CLIENT_ID, etc.
+├── .env                              # gitignored
+├── app.json
+├── babel.config.js
+├── metro.config.js
+├── tsconfig.json
+├── package.json
+└── index.js

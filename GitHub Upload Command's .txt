@@ -1,0 +1,36 @@
+echo "# NokriHub" >> README.md
+git init
+git add README.md
+git commit -m "InternShip Project"
+git branch -M main
+git remote add origin https://github.com/SyedMesamAbbas/NokriHub.git
+git push -u origin main
+
+
+
+
+
+
+
+
+-------------FOR PUSH----------------
+git remote add origin https://github.com/SyedMesamAbbas/NokriHub.git
+git branch -M main
+git push -u origin main
+
+
+
+
+
+
+
+
+
+
+
+
+C:\Internship\NokriHub
+git status
+git add .
+git commit -m "Update NokriHub files"
+git push
